@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mysql-jdbc-lecture" />
         <module name="mysql-mybatis-lecture" />
+        <module name="mysql-mbg-lecture" />
       </profile>
     </annotationProcessing>
   </component>
