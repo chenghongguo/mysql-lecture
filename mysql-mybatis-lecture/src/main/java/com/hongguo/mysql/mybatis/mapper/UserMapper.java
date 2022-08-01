@@ -20,4 +20,14 @@ public interface UserMapper {
     int updateById(SysUser sysUser);
 
     int deleteById(Long id);
+
+    List<SysUser> selectByUser(SysUser sysUser);
+
+    int updateByIdSelective(SysUser sysUser);
+
+    SysUser selectByIdOrUserName(SysUser sysUser);
+
+    List<SysUser> selectByIds(List<Long> ids);
+
+    int insertList(List<SysUser> sysUsers);
 }
