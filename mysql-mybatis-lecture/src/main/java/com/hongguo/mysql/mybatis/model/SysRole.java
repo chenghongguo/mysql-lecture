@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ public class SysRole {
     private Long id;
     private String roleName;
     private Integer enabled;
-    private Long createBy;
-    private Date createTime;
+    private CreateInfo createInfo;
+    private List<SysPrivilege> privilegeList;
 }
 

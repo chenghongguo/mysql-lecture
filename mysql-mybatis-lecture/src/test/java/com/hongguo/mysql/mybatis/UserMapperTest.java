@@ -1,6 +1,7 @@
 package com.hongguo.mysql.mybatis;
 
 import com.hongguo.mysql.mybatis.mapper.UserMapper;
+import com.hongguo.mysql.mybatis.model.SysPrivilege;
 import com.hongguo.mysql.mybatis.model.SysRole;
 import com.hongguo.mysql.mybatis.model.SysUser;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +15,89 @@ import java.util.List;
 public class UserMapperTest extends BaseMapperTest {
 
     @Test
+    public void testSelectUserAndRolesSelect() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            SysUser sysUser = mapper.selectAllUserAndRolesSelect(1L);
+            Assert.assertNotNull(sysUser);
+            System.out.println("用户名：" + sysUser.getUserName());
+            for (SysRole sysRole : sysUser.getRoleList()) {
+                System.out.println("\t角色名：" + sysRole.getRoleName());
+                for (SysPrivilege privilege : sysRole.getPrivilegeList()) {
+                    System.out.println("\t\t权限名：" + privilege.getPrivilegeName());
+                }
+            }
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectUserAndRoles() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            List<SysUser> sysUsers = mapper.selectUserAndRoles();
+            Assert.assertNotNull(sysUsers);
+            System.out.println("用户数：" + sysUsers.size());
+            for (SysUser sysUser : sysUsers) {
+                System.out.println("用户名：" + sysUser.getUserName());
+                for (SysRole sysRole : sysUser.getRoleList()) {
+                    System.out.println("\t角色名：" + sysRole.getRoleName());
+                    for (SysPrivilege privilege : sysRole.getPrivilegeList()) {
+                        System.out.println("\t\t权限名：" + privilege.getPrivilegeName());
+                    }
+                }
+            }
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectUserAndRoleByIdSelect() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            SysUser sysUser = mapper.selectUserAndRoleByIdSelect(1001L);
+            Assert.assertNotNull(sysUser);
+            System.out.println("调用sysUser.equals");
+            sysUser.equals(null);
+            System.out.println("调用sysUser.getRole()");
+            Assert.assertNotNull(sysUser.getRole());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectUserAndRoleById2() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            SysUser sysUser = mapper.selectUserAndRoleById2(1001L);
+            Assert.assertNotNull(sysUser);
+            Assert.assertNotNull(sysUser.getRole());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectUserAndRoleById() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            SysUser sysUser = mapper.selectUserAndRoleById(1001L);
+            Assert.assertNotNull(sysUser);
+            Assert.assertNotNull(sysUser.getRole());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
     public void testInsertList() {
         SqlSession sqlSession = getSqlSession();
         try {
@@ -25,12 +109,12 @@ public class UserMapperTest extends BaseMapperTest {
                 sysUser.setUserPassword("123456");
                 sysUser.setUserEmail("test@184.com");
                 sysUser.setUserInfo("test list1");
-                sysUser.setHeadImg(new byte[]{1,3,3});
+                sysUser.setHeadImg(new byte[]{1, 3, 3});
                 sysUser.setCreateTime(new Date());
                 sysUsers.add(sysUser);
             }
             int count = mapper.insertList(sysUsers);
-            for (SysUser sysUser : sysUsers){
+            for (SysUser sysUser : sysUsers) {
                 System.out.println(sysUser.getId());
             }
             Assert.assertEquals(2, count);

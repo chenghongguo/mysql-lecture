@@ -12,6 +12,8 @@ public interface RoleMapper {
             "where id = #{id}")
     SysRole selectById(Long id);
 
+    SysRole selectRoleById(Long id);
+
     @Results(id = "roleResultMap", value = {
             @Result(property = "id", column = "id", id = true),
             @Result(property = "roleName", column = "role_name"),

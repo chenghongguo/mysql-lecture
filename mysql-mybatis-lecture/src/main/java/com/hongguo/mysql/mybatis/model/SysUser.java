@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +18,6 @@ public class SysUser {
     private String userInfo;
     private byte[] headImg;
     private Date createTime;
+    private SysRole role;
+    private List<SysRole> roleList;
 }

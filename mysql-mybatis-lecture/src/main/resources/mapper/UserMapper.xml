@@ -13,34 +13,55 @@
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="userRoleMap" extends="userMap"
+               type="com.hongguo.mysql.mybatis.model.SysUser">
+        <association property="role" columnPrefix="role_" javaType="sysRole"
+                     resultMap="com.hongguo.mysql.mybatis.mapper.RoleMapper.roleMap"/>
+    </resultMap>
+
+    <resultMap id="userRoleListMap" extends="userMap"
+               type="com.hongguo.mysql.mybatis.model.SysUser">
+        <collection property="roleList" columnPrefix="role_"
+                    resultMap="com.hongguo.mysql.mybatis.mapper.RoleMapper.rolePrivilegeListMap"/>
+    </resultMap>
+
+    <resultMap id="userRoleMapSelect" extends="userMap" type="sysUser">
+        <association property="role" column="{id=role_id}" fetchType="lazy"
+                     select="com.hongguo.mysql.mybatis.mapper.RoleMapper.selectRoleById"/>
+    </resultMap>
+
+    <resultMap id="userRoleListMapSelect" extends="userMap"
+               type="com.hongguo.mysql.mybatis.model.SysUser">
+        <collection property="roleList"
+                    fetchType="lazy"
+                    select="com.hongguo.mysql.mybatis.mapper.RoleMapper.selectRoleByUserId"
+                    column="{userId=id}"/>
+    </resultMap>
+
     <insert id="insert">
         insert into sys_user
-        (
-            user_name, user_password, user_email, user_info, head_img, create_time
-        )
-        values
-        (
-            #{userName}, #{userPassword},#{userEmail}, #{userInfo},#{headImg, jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP}
-        )
+        (user_name, user_password, user_email, user_info, head_img, create_time)
+        values (#{userName}, #{userPassword}, #{userEmail}, #{userInfo}, #{headImg, jdbcType=BLOB},
+                #{createTime,jdbcType=TIMESTAMP})
     </insert>
 
     <insert id="insert2" useGeneratedKeys="true" keyProperty="id">
         insert into sys_user
         (
-            user_name, user_password,
-            <if test="userEmail != null and userEmail != ''">
-             user_email,
-            </if>
-            user_info, head_img, create_time
+        user_name, user_password,
+        <if test="userEmail != null and userEmail != ''">
+            user_email,
+        </if>
+        user_info, head_img, create_time
         )
         values
-            (
-                #{userName}, #{userPassword},
-                 <if test="userEmail != null and userEmail != ''">
-                     #{userEmail},
-                 </if>
-                #{userInfo},#{headImg, jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP}
-            )
+        (
+        #{userName}, #{userPassword},
+        <if test="userEmail != null and userEmail != ''">
+            #{userEmail},
+        </if>
+        #{userInfo},#{headImg, jdbcType=BLOB},#{createTime,jdbcType=TIMESTAMP}
+        )
     </insert>
 
     <select id="selectById" resultMap="userMap">
@@ -55,36 +76,36 @@
     </select>
 
     <select id="selectRoleByUserId" resultType="sysRole">
-        select
-            r.id,
-            r.role_name,
-            r.enabled,
-            r.create_by,
-            r.create_time
+        select r.id,
+               r.role_name,
+               r.enabled,
+               r.create_by,
+               r.create_time
         from sys_user u
-        join sys_user_role ur on u.id = ur.user_id
-        join sys_role r on ur.role_id = r.id
+                 join sys_user_role ur on u.id = ur.user_id
+                 join sys_role r on ur.role_id = r.id
         where u.id = #{userId}
     </select>
 
     <update id="updateById">
         update sys_user
-        set user_name = #{userName},
+        set user_name     = #{userName},
             user_password = #{userPassword},
-            user_info = #{userInfo},
-            head_img = #{headImg,jdbcType=BLOB},
-            create_time = #{createTime,jdbcType=TIMESTAMP}
+            user_info     = #{userInfo},
+            head_img      = #{headImg,jdbcType=BLOB},
+            create_time   = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id}
     </update>
 
     <delete id="deleteById">
-        delete from sys_user
+        delete
+        from sys_user
         where id = #{id}
     </delete>
 
     <select id="selectByUser" resultType="sysUser">
         select id, user_name userName, user_password userPassword, user_info userInfo, user_email userEmail,
-               head_img headImg, create_time createTime
+        head_img headImg, create_time createTime
         from sys_user
         <where>
             <if test="userName != null and userName != ''">
@@ -156,4 +177,92 @@
             #{item.userInfo}, #{item.headImg,jdbcType=BLOB}, #{item.createTime,jdbcType=TIMESTAMP})
         </foreach>
     </insert>
+
+    <select id="selectUserAndRoleById" resultType="sysUser">
+        select u.id,
+               u.user_name,
+               u.user_password,
+               u.user_email,
+               u.user_info,
+               u.head_img,
+               u.create_time,
+               r.id          "role.id",
+               r.role_name   "role.roleName",
+               r.enabled     "role.enabled",
+               r.create_by   "role.createBy",
+               r.create_time "role.createTime"
+        from sys_user u
+                 inner join sys_user_role sur on u.id = sur.user_id
+                 inner join sys_role r on sur.role_id = r.id
+        where u.id = #{id}
+    </select>
+
+    <select id="selectUserAndRoleById2" resultMap="userRoleMap">
+        select u.id,
+               u.user_name,
+               u.user_password,
+               u.user_email,
+               u.user_info,
+               u.head_img,
+               u.create_time,
+               r.id          role_id,
+               r.role_name   role_role_name,
+               r.enabled     role_enabled,
+               r.create_by   role_create_by,
+               r.create_time role_create_time
+        from sys_user u
+                 inner join sys_user_role sur on u.id = sur.user_id
+                 inner join sys_role r on sur.role_id = r.id
+        where u.id = #{id}
+    </select>
+
+    <select id="selectUserAndRoleByIdSelect" resultMap="userRoleMapSelect">
+        select u.id,
+               u.user_name,
+               u.user_password,
+               u.user_email,
+               u.user_info,
+               u.head_img,
+               u.create_time,
+               ur.role_id
+        from sys_user u
+                 inner join sys_user_role ur on u.id = ur.user_id
+        where u.id = #{id}
+    </select>
+
+    <select id="selectUserAndRoles" resultMap="userRoleListMap">
+        select u.id,
+               u.user_name,
+               u.user_password,
+               u.user_email,
+               u.user_info,
+               u.head_img,
+               u.create_time,
+               r.id          role_id,
+               r.role_name   role_role_name,
+               r.enabled     role_enabled,
+               r.create_by   role_create_by,
+               r.create_time role_create_time,
+               p.id role_privilege_id,
+               p.privilege_name role_privilege_privilege_name,
+               p.privilege_url role_privilege_privilege_url
+        from sys_user u
+                 inner join sys_user_role ur on u.id = ur.user_id
+                 inner join sys_role r on ur.role_id = r.id
+                 inner join sys_role_privilege rp on ur.role_id = rp.role_id
+                 inner join sys_privilege p on rp.privilege_id = p.id
+    </select>
+
+    <select id="selectAllUserAndRolesSelect" resultMap="userRoleListMapSelect">
+        select
+            u.id,
+            u.user_name,
+            u.user_password,
+            u.user_email,
+            u.user_info,
+            u.head_img,
+            u.create_time
+        from sys_user u
+        where u.id = #{id}
+    </select>
 </mapper>

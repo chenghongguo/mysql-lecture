@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.List;
 
 public class RoleMapperTest extends BaseMapperTest {
@@ -54,8 +53,8 @@ public class RoleMapperTest extends BaseMapperTest {
             RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
             SysRole sysRole = new SysRole();
             sysRole.setRoleName("test22");
-            sysRole.setCreateTime(new Date());
-            sysRole.setCreateBy(1L);
+//            sysRole.setCreateTime(new Date());
+//            sysRole.setCreateBy(1L);
             sysRole.setEnabled(1);
             sysRole.setId(3L);
             int count = mapper.insert(sysRole);
@@ -73,8 +72,8 @@ public class RoleMapperTest extends BaseMapperTest {
             RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
             SysRole sysRole = new SysRole();
             sysRole.setRoleName("test22");
-            sysRole.setCreateTime(new Date());
-            sysRole.setCreateBy(1L);
+//            sysRole.setCreateTime(new Date());
+//            sysRole.setCreateBy(1L);
             sysRole.setEnabled(1);
             int count = mapper.insert2(sysRole);
             Assert.assertEquals(1, count);
@@ -92,8 +91,8 @@ public class RoleMapperTest extends BaseMapperTest {
             RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
             SysRole sysRole = new SysRole();
             sysRole.setRoleName("test22");
-            sysRole.setCreateTime(new Date());
-            sysRole.setCreateBy(1L);
+//            sysRole.setCreateTime(new Date());
+//            sysRole.setCreateBy(1L);
             sysRole.setEnabled(1);
             int count = mapper.insert3(sysRole);
             Assert.assertEquals(1, count);
