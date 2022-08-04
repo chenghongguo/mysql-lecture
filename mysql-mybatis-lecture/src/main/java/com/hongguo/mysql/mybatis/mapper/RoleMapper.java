@@ -5,6 +5,13 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+//@CacheNamespace(
+//        eviction = FifoCache.class,
+//        flushInterval = 60000,
+//        size = 512,
+//        readWrite = true
+//)
+@CacheNamespaceRef(RoleMapper.class)
 public interface RoleMapper {
 
     @Select("select id, role_name as roleName, enabled, create_by as createBy, create_time as createTime " +

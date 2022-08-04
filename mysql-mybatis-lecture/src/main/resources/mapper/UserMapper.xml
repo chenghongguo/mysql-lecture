@@ -64,7 +64,7 @@
         )
     </insert>
 
-    <select id="selectById" resultMap="userMap">
+    <select id="selectById" resultMap="userMap" flushCache="true">
         select *
         from sys_user
         where id = #{id}
