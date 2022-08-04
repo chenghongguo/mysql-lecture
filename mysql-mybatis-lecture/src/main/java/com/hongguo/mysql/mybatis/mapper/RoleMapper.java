@@ -45,4 +45,6 @@ public interface RoleMapper {
             resultType = Long.class,
             before = false)
     int insert3(SysRole role);
+
+    int updateById(SysRole sysRole);
 }

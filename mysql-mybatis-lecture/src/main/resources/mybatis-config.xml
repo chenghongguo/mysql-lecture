@@ -13,6 +13,12 @@
         <package name="com.hongguo.mysql.mybatis.model"/>
     </typeAliases>
 
+    <typeHandlers>
+        <typeHandler
+                javaType="com.hongguo.mysql.mybatis.enums.Enabled"
+                handler="com.hongguo.mysql.mybatis.EnabledTypeHandler"/>
+    </typeHandlers>
+
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>

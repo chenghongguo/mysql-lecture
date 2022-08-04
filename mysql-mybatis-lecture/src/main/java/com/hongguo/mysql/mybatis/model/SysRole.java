@@ -1,5 +1,6 @@
 package com.hongguo.mysql.mybatis.model;
 
+import com.hongguo.mysql.mybatis.enums.Enabled;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import java.util.List;
 public class SysRole {
     private Long id;
     private String roleName;
-    private Integer enabled;
+    private Enabled enabled;
     private CreateInfo createInfo;
     private List<SysPrivilege> privilegeList;
 }

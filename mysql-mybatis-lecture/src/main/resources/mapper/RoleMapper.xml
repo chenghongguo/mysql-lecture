@@ -57,4 +57,10 @@
         inner join sys_user_role ur on r.id = ur.role_id
         where ur.user_id = #{userId}
     </select>
+
+    <update id="updateById" parameterType="sysRole">
+        update sys_role
+        set role_name = #{roleName}, enabled = #{enabled}, create_time = #{createInfo.createTime}
+        where id = #{id}
+    </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.hongguo.mysql.mybatis;
 
+import com.hongguo.mysql.mybatis.enums.Enabled;
 import com.hongguo.mysql.mybatis.mapper.RoleMapper;
 import com.hongguo.mysql.mybatis.model.SysRole;
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,22 @@ import org.junit.Test;
 import java.util.List;
 
 public class RoleMapperTest extends BaseMapperTest {
+
+    @Test
+    public void testUpdateById() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
+            SysRole sysRole = mapper.selectById(2L);
+            Assert.assertNotNull(sysRole);
+
+            sysRole.setEnabled(Enabled.disabled);
+            mapper.updateById(sysRole);
+        } finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
 
     @Test
     public void testSelectId() {
@@ -55,7 +72,7 @@ public class RoleMapperTest extends BaseMapperTest {
             sysRole.setRoleName("test22");
 //            sysRole.setCreateTime(new Date());
 //            sysRole.setCreateBy(1L);
-            sysRole.setEnabled(1);
+//            sysRole.setEnabled(1);
             sysRole.setId(3L);
             int count = mapper.insert(sysRole);
             Assert.assertEquals(1, count);
@@ -74,7 +91,7 @@ public class RoleMapperTest extends BaseMapperTest {
             sysRole.setRoleName("test22");
 //            sysRole.setCreateTime(new Date());
 //            sysRole.setCreateBy(1L);
-            sysRole.setEnabled(1);
+//            sysRole.setEnabled(1);
             int count = mapper.insert2(sysRole);
             Assert.assertEquals(1, count);
             Assert.assertEquals(5, sysRole.getId().longValue());
@@ -93,7 +110,7 @@ public class RoleMapperTest extends BaseMapperTest {
             sysRole.setRoleName("test22");
 //            sysRole.setCreateTime(new Date());
 //            sysRole.setCreateBy(1L);
-            sysRole.setEnabled(1);
+//            sysRole.setEnabled(1);
             int count = mapper.insert3(sysRole);
             Assert.assertEquals(1, count);
             Assert.assertEquals(6, sysRole.getId().longValue());
