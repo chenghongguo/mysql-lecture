@@ -8,8 +8,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 public class RoleMapperTest extends BaseMapperTest {
+
+    @Test
+    public void testSelectAllWithMap() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
+            List<Map<String, Object>> sysRoles = mapper.selectAllWithMap();
+            sysRoles.forEach(System.out::println);
+        } finally {
+            sqlSession.close();
+        }
+    }
 
     @Test
     public void testUpdateById() {

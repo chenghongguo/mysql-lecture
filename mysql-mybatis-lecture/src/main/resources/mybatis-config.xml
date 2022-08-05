@@ -21,6 +21,10 @@
                 handler="com.hongguo.mysql.mybatis.EnabledTypeHandler"/>
     </typeHandlers>
 
+    <plugins>
+        <plugin interceptor="com.hongguo.mysql.mybatis.interceptor.CameHumpInterceptor" />
+    </plugins>
+
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>

@@ -4,6 +4,7 @@ import com.hongguo.mysql.mybatis.model.SysRole;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 //@CacheNamespace(
 //        eviction = FifoCache.class,
@@ -35,6 +36,9 @@ public interface RoleMapper {
     @ResultMap("roleResultMap")
     @Select("select id, role_name, enabled, create_by, create_time from sys_role")
     List<SysRole> selectAll();
+
+    @Select("select id, role_name, enabled, create_by, create_time from sys_role")
+    List<Map<String, Object>> selectAllWithMap();
 
     @Insert("insert into sys_role (id, role_name, enabled, create_by, create_time)" +
             " values (#{id}, #{roleName}, #{enabled}, #{createBy},#{createTime, jdbcType=TIMESTAMP})")
