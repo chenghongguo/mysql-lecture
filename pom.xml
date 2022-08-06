@@ -13,6 +13,7 @@
         <module>mysql-jdbc-lecture</module>
         <module>mysql-mybatis-lecture</module>
         <module>mysql-mbg-lecture</module>
+        <module>mysql-spring-mybatis-lecture</module>
     </modules>
 
     <properties>

@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mysql-jdbc-lecture" />
         <module name="mysql-mybatis-lecture" />
         <module name="mysql-mbg-lecture" />
+        <module name="mysql-jdbc-lecture" />
+        <module name="mysql-spring-mybatis-lecture" />
       </profile>
     </annotationProcessing>
   </component>
