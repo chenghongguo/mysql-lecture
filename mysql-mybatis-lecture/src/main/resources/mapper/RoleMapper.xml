@@ -13,7 +13,7 @@
     <resultMap id="roleMap" type="com.hongguo.mysql.mybatis.model.SysRole">
         <result property="id" column="id"/>
         <result property="roleName" column="role_name"/>
-        <result property="enabled" column="enabled"/>
+        <result property="enabled" column="enabled" typeHandler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>
         <association property="createInfo">
             <result property="createBy" column="create_by"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>

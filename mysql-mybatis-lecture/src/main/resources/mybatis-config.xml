@@ -16,10 +16,14 @@
     </typeAliases>
 
     <typeHandlers>
-        <typeHandler
-                javaType="com.hongguo.mysql.mybatis.enums.Enabled"
-                handler="com.hongguo.mysql.mybatis.EnabledTypeHandler"/>
+<!--        <typeHandler-->
+<!--                javaType="com.hongguo.mysql.mybatis.enums.Enabled"-->
+<!--                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>-->
     </typeHandlers>
+    
+    <objectFactory type="com.hongguo.mysql.mybatis.factory.MyObjectFactory">
+        <property name="name" value="MyObjectFactory"/>
+    </objectFactory>
 
     <plugins>
         <plugin interceptor="com.hongguo.mysql.mybatis.interceptor.CameHumpInterceptor" />

@@ -1,5 +1,6 @@
 package com.hongguo.mysql.mybatis.mapper;
 
+import com.hongguo.mysql.mybatis.handler.EnabledTypeHandler;
 import com.hongguo.mysql.mybatis.model.SysRole;
 import org.apache.ibatis.annotations.*;
 
@@ -25,7 +26,7 @@ public interface RoleMapper {
     @Results(id = "roleResultMap", value = {
             @Result(property = "id", column = "id", id = true),
             @Result(property = "roleName", column = "role_name"),
-            @Result(property = "enabled", column = "enabled"),
+            @Result(property = "enabled", column = "enabled", typeHandler = EnabledTypeHandler.class),
             @Result(property = "createBy", column = "create_by"),
             @Result(property = "createTime", column = "create_time")
     })
@@ -34,7 +35,7 @@ public interface RoleMapper {
     SysRole selectById2(Long id);
 
     @ResultMap("roleResultMap")
-    @Select("select id, role_name, enabled, create_by, create_time from sys_role")
+    @Select("select id, role_name, enabled, create_by , create_time from sys_role")
     List<SysRole> selectAll();
 
     @Select("select id, role_name, enabled, create_by, create_time from sys_role")

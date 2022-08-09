@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -17,6 +18,8 @@ public class SysRole implements Serializable {
     private String roleName;
     private Enabled enabled;
     private CreateInfo createInfo;
+    private Long createBy;
+    private Date createTime;
     private List<SysPrivilege> privilegeList;
 }
 

@@ -1,4 +1,4 @@
-package com.hongguo.mysql.mybatis;
+package com.hongguo.mysql.mybatis.handler;
 
 import com.hongguo.mysql.mybatis.enums.Enabled;
 import org.apache.ibatis.type.JdbcType;

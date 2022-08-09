@@ -13,5 +13,8 @@
         <module name="mysql-spring-mybatis-lecture" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mysql-springboot-mybatis-lecture" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
