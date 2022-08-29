@@ -3,6 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+    <properties>
+        <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbc.url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false"/>
+        <property name="jdbc.username" value="root"/>
+        <property name="jdbc.password" value="123abc"/>
+    </properties>
+
     <settings>
         <setting name="logImpl" value="LOG4J"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
@@ -12,13 +20,14 @@
     </settings>
 
     <typeAliases>
+        <typeAlias type="com.hongguo.mysql.mybatis.model.SysRole" alias="sysRole"/>
         <package name="com.hongguo.mysql.mybatis.model"/>
     </typeAliases>
 
     <typeHandlers>
-<!--        <typeHandler-->
-<!--                javaType="com.hongguo.mysql.mybatis.enums.Enabled"-->
-<!--                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>-->
+        <typeHandler
+                javaType="com.hongguo.mysql.mybatis.enums.Enabled"
+                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>
     </typeHandlers>
     
     <objectFactory type="com.hongguo.mysql.mybatis.factory.MyObjectFactory">
@@ -41,12 +50,17 @@
         </environment>
     </environments>
 
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+    </databaseIdProvider>
+
     <mappers>
         <mapper resource="mapper/CountryMapper.xml"/>
-        <mapper resource="mapper/UserMapper.xml"/>
-        <mapper resource="mapper/RoleMapper.xml"/>
-        <mapper resource="mapper/UserRoleMapper.xml"/>
-        <mapper resource="mapper/PrivilegeMapper.xml"/>
-        <mapper resource="mapper/RolePrivilegeMapper.xml"/>
+        <mapper class="com.hongguo.mysql.mybatis.mapper.UserMapper"/>
+<!--        <mapper resource="mapper/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/RoleMapper.xml"/>-->
+<!--        <mapper resource="mapper/UserRoleMapper.xml"/>-->
+<!--        <mapper resource="mapper/PrivilegeMapper.xml"/>-->
+<!--        <mapper resource="mapper/RolePrivilegeMapper.xml"/>-->
     </mappers>
 </configuration>

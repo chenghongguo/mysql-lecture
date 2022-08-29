@@ -15,6 +15,11 @@ import java.util.List;
 public class UserMapperTest extends BaseMapperTest {
 
     @Test
+    public void testInit() {
+        getSqlSession();
+    }
+
+    @Test
     public void testSelectUserAndRolesSelect() {
         SqlSession sqlSession = getSqlSession();
         try {
