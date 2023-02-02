@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <properties>
+    <properties url="file:/Users/hongguo_cheng/java-workspace/study/mysql-lecture/mysql-mybatis-lecture/src/main/resources/config.properties">
         <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
         <property name="jdbc.url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false"/>
         <property name="jdbc.username" value="root"/>
@@ -17,6 +17,7 @@
         <setting name="aggressiveLazyLoading" value="false"/>
         <!-- 开启二级缓存 -->
         <setting name="cacheEnabled" value="true"/>
+<!--        <setting name="cacheEnabled2" value="true"/>-->
     </settings>
 
     <typeAliases>
@@ -25,9 +26,10 @@
     </typeAliases>
 
     <typeHandlers>
-        <typeHandler
-                javaType="com.hongguo.mysql.mybatis.enums.Enabled"
-                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>
+<!--        <typeHandler-->
+<!--                javaType="com.hongguo.mysql.mybatis.enums.Enabled"-->
+<!--                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>-->
+        <typeHandler handler="com.hongguo.mysql.mybatis.handler.StringsTypeHandler" javaType="java.lang.Integer" jdbcType="VARCHAR"/>
     </typeHandlers>
     
     <objectFactory type="com.hongguo.mysql.mybatis.factory.MyObjectFactory">
@@ -35,7 +37,10 @@
     </objectFactory>
 
     <plugins>
-        <plugin interceptor="com.hongguo.mysql.mybatis.interceptor.CameHumpInterceptor" />
+        <plugin interceptor="com.hongguo.mysql.mybatis.interceptor.CameHumpInterceptor">
+            <property name="key1" value="value1"/>
+            <property name="key2" value="value2"/>
+        </plugin>
     </plugins>
 
     <environments default="dev">
