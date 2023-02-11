@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongguo.mysql.mybatis.mapper.CountryMapper">
+
+    <!--    <cache flushInterval="60"/>-->
+
+    <!--    <cache-ref namespace="com.hongguo.mysql.mybatis.mapper.PrivilegeMapper"/>-->
+
+    <!--    <resultMap id="BaseResultMap" type="com.hongguo.mysql.mybatis.model.Country">-->
+    <!--        <id property="id" column="id"/>-->
+    <!--        <result column="countryname" property="countryName"/>-->
+    <!--        <result column="countrycode" property="countryCode"/>-->
+    <!--    </resultMap>-->
+
+    <!--    <sql id="BaseColumn">-->
+    <!--        id, countryname, countrycode-->
+    <!--    </sql>-->
+
+    <!--    <sql id="fromTable">-->
+    <!--        from-->
+    <!--        ${countryTableName}-->
+    <!--    </sql>-->
+
+    <!--    <select id="selectAll" resultMap="BaseResultMap">-->
+    <!--        select-->
+    <!--        <include refid="BaseColumn"/>-->
+    <!--        <include refid="fromTable">-->
+    <!--            <property name="countryTableName" value="country"/>-->
+    <!--        </include>-->
+    <!--    </select>-->
+
+    <insert id="insert" parameterType="com.hongguo.mysql.mybatis.model.Country">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select max(id) + 1 from country;
+        </selectKey>
+        insert into country (id, countryname, countrycode)
+        values (#{id}, #{countryName}, #{countryCode})
+    </insert>
+</mapper>

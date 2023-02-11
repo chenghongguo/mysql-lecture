@@ -3,6 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hongguo.mysql.mybatis.mapper.PrivilegeMapper">
 
+    <cache/>
+
     <resultMap id="privilegeMap" type="sysPrivilege">
         <id property="id" column="id"/>
         <result property="privilegeName" column="privilege_name"/>

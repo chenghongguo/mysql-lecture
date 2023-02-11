@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <properties url="file:/Users/hongguo_cheng/java-workspace/study/mysql-lecture/mysql-mybatis-lecture/src/main/resources/config.properties">
+    <properties
+            url="file:/Users/hongguo_cheng/java-workspace/study/mysql-lecture/mysql-mybatis-lecture/src/main/resources/config.properties">
         <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
         <property name="jdbc.url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false"/>
         <property name="jdbc.username" value="root"/>
@@ -17,7 +18,7 @@
         <setting name="aggressiveLazyLoading" value="false"/>
         <!-- 开启二级缓存 -->
         <setting name="cacheEnabled" value="true"/>
-<!--        <setting name="cacheEnabled2" value="true"/>-->
+        <!--        <setting name="cacheEnabled2" value="true"/>-->
     </settings>
 
     <typeAliases>
@@ -26,12 +27,13 @@
     </typeAliases>
 
     <typeHandlers>
-<!--        <typeHandler-->
-<!--                javaType="com.hongguo.mysql.mybatis.enums.Enabled"-->
-<!--                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>-->
-        <typeHandler handler="com.hongguo.mysql.mybatis.handler.StringsTypeHandler" javaType="java.lang.Integer" jdbcType="VARCHAR"/>
+        <!--        <typeHandler-->
+        <!--                javaType="com.hongguo.mysql.mybatis.enums.Enabled"-->
+        <!--                handler="com.hongguo.mysql.mybatis.handler.EnabledTypeHandler"/>-->
+        <typeHandler handler="com.hongguo.mysql.mybatis.handler.StringsTypeHandler" javaType="java.lang.Integer"
+                     jdbcType="VARCHAR"/>
     </typeHandlers>
-    
+
     <objectFactory type="com.hongguo.mysql.mybatis.factory.MyObjectFactory">
         <property name="name" value="MyObjectFactory"/>
     </objectFactory>
@@ -48,7 +50,8 @@
             <transactionManager type="JDBC"/>
             <dataSource type="UNPOOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;characterEncoding=UTF8"/>
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;characterEncoding=UTF8"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123abc"/>
             </dataSource>
@@ -60,12 +63,13 @@
     </databaseIdProvider>
 
     <mappers>
-        <mapper resource="mapper/CountryMapper.xml"/>
-        <mapper class="com.hongguo.mysql.mybatis.mapper.UserMapper"/>
-<!--        <mapper resource="mapper/UserMapper.xml"/>-->
-<!--        <mapper resource="mapper/RoleMapper.xml"/>-->
-<!--        <mapper resource="mapper/UserRoleMapper.xml"/>-->
-<!--        <mapper resource="mapper/PrivilegeMapper.xml"/>-->
-<!--        <mapper resource="mapper/RolePrivilegeMapper.xml"/>-->
+        <mapper resource="mapper/country/CountryMapper.xml"/>
+        <!--        <mapper resource="mapper/RoleMapper.xml"/>-->
+        <!--        <mapper class="com.hongguo.mysql.mybatis.mapper.UserMapper"/>-->
+        <!--        <mapper resource="mapper/UserMapper.xml"/>-->
+        <!--        <mapper resource="mapper/RoleMapper.xml"/>-->
+        <!--        <mapper resource="mapper/UserRoleMapper.xml"/>-->
+        <!--        <mapper resource="mapper/PrivilegeMapper.xml"/>-->
+        <!--        <mapper resource="mapper/RolePrivilegeMapper.xml"/>-->
     </mappers>
 </configuration>
