@@ -19,8 +19,23 @@ public class CountryMapperTest extends BaseMapperTest {
         }
     }
 
+    @Test
+    public void testInsert() {
+        SqlSession sqlSession = getSqlSession();
+        try {
+            Country c = new Country();
+            c.setCountryCode("ZHZH");
+            c.setCountryName("zhongguo");
+            int count = sqlSession.insert("insert", c);
+            sqlSession.commit();
+            System.out.println(c);
+        } finally {
+            sqlSession.close();
+        }
+    }
+
     private void printCountryList(List<Country> countries) {
         countries.forEach(c ->
-                System.out.printf("%-4d%4s%4s\n", c.getId(), c.getCountryname(), c.getCountrycode()));
+                System.out.printf("%-4d%4s%4s\n", c.getId(), c.getCountryCode(), c.getCountryName()));
     }
 }

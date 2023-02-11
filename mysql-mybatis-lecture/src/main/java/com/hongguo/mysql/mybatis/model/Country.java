@@ -1,40 +1,18 @@
 package com.hongguo.mysql.mybatis.model;
 
-public class Country {
-    private Long id;
-    private String countryname;
-    private String countrycode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-    public Long getId() {
-        return id;
-    }
+import java.io.Serializable;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+@Getter
+@Setter
+@ToString
+public class Country implements Serializable {
+    private static final long serialVersionUID = 6624179006310607296L;
+    private Integer id;
+    private String countryName;
+    private String countryCode;
 
-    public String getCountryname() {
-        return countryname;
-    }
-
-    public void setCountryname(String countryname) {
-        this.countryname = countryname;
-    }
-
-    public String getCountrycode() {
-        return countrycode;
-    }
-
-    public void setCountrycode(String countrycode) {
-        this.countrycode = countrycode;
-    }
-
-    @Override
-    public String toString() {
-        return "Country{" +
-                "id=" + id +
-                ", countryname='" + countryname + '\'' +
-                ", countrycode='" + countrycode + '\'' +
-                '}';
-    }
 }
