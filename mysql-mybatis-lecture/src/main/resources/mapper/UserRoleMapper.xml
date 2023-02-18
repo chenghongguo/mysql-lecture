@@ -3,4 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hongguo.mysql.mybatis.mapper.UserRoleMapper">
 
+    <sql id="BaseColumn">
+        id, countryname, countrycode
+    </sql>
+
+    <sql id="fromTable">
+        from
+        ${countryTableName}
+    </sql>
 </mapper>

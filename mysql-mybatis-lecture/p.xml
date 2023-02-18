@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongguo.mysql.mybatis.mapper.PrivilegeMapper">
+    <resultMap id="privilegeMap" type="sysPrivilege">
+        <id property="id" column="id"/>
+        <result property="privilegeName" column="privilege_name"/>
+        <result property="privilegeUrl" column="privilege_url"/>
+    </resultMap>
+</mapper>
+<!--<jdbc>-->
+<!--    <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>-->
+<!--    <jdbc.url>test</jdbc.url>-->
+<!--    <jdbc.user>root</jdbc.user>-->
+<!--    <jdbc.password>123</jdbc.password>-->
+<!--</jdbc>-->

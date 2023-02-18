@@ -7,34 +7,39 @@
 
     <!--    <cache-ref namespace="com.hongguo.mysql.mybatis.mapper.PrivilegeMapper"/>-->
 
-    <!--    <resultMap id="BaseResultMap" type="com.hongguo.mysql.mybatis.model.Country">-->
-    <!--        <id property="id" column="id"/>-->
-    <!--        <result column="countryname" property="countryName"/>-->
-    <!--        <result column="countrycode" property="countryCode"/>-->
-    <!--    </resultMap>-->
+    <resultMap id="BaseResultMap" type="com.hongguo.mysql.mybatis.model.Country">
+        <id property="id" column="id"/>
+        <result column="countryname" property="countryName"/>
+        <result column="countrycode" property="countryCode"/>
+    </resultMap>
 
-    <!--    <sql id="BaseColumn">-->
-    <!--        id, countryname, countrycode-->
-    <!--    </sql>-->
+<!--    <sql id="BaseColumn">-->
+<!--        id, countryname, countrycode-->
+<!--    </sql>-->
 
-    <!--    <sql id="fromTable">-->
-    <!--        from-->
-    <!--        ${countryTableName}-->
-    <!--    </sql>-->
+<!--    <sql id="fromTable">-->
+<!--        from-->
+<!--        ${countryTableName}-->
+<!--    </sql>-->
 
-    <!--    <select id="selectAll" resultMap="BaseResultMap">-->
-    <!--        select-->
-    <!--        <include refid="BaseColumn"/>-->
-    <!--        <include refid="fromTable">-->
-    <!--            <property name="countryTableName" value="country"/>-->
-    <!--        </include>-->
-    <!--    </select>-->
+<!--    <select id="selectAll" resultMap="BaseResultMap">-->
+<!--        select-->
+<!--        <include refid="BaseColumn"/>-->
+<!--        <include refid="fromTable">-->
+<!--            <property name="countryTableName" value="country"/>-->
+<!--        </include>-->
+<!--    </select>-->
 
-    <insert id="insert" parameterType="com.hongguo.mysql.mybatis.model.Country">
-        <selectKey keyProperty="id" resultType="int" order="BEFORE">
-            select max(id) + 1 from country;
-        </selectKey>
-        insert into country (id, countryname, countrycode)
-        values (#{id}, #{countryName}, #{countryCode})
-    </insert>
+    <select id="selectAll" resultMap="BaseResultMap" flushCache="true">
+        select id, countryname, countrycode
+        from country;
+    </select>
+
+<!--    <insert id="insertAll" parameterType="com.hongguo.mysql.mybatis.model.Country">-->
+<!--        &lt;!&ndash;        <selectKey keyProperty="id" resultType="int" order="BEFORE">&ndash;&gt;-->
+<!--        &lt;!&ndash;            select max(id) + 1 from country;&ndash;&gt;-->
+<!--        &lt;!&ndash;        </selectKey>&ndash;&gt;-->
+<!--        insert into country (id, countryname, countrycode)-->
+<!--        values (#{id}, #{countryName}, #{countryCode})-->
+<!--    </insert>-->
 </mapper>

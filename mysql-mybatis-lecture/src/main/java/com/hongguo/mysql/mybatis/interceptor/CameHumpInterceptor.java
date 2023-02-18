@@ -61,14 +61,4 @@ public class CameHumpInterceptor implements Interceptor {
         }
         return sb.toString();
     }
-
-    @Override
-    public Object plugin(Object target) {
-        return Plugin.wrap(target, this);
-    }
-
-    @Override
-    public void setProperties(Properties properties) {
-
-    }
 }

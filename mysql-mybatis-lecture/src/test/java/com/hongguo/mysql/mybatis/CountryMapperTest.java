@@ -26,9 +26,9 @@ public class CountryMapperTest extends BaseMapperTest {
             Country c = new Country();
             c.setCountryCode("ZHZH");
             c.setCountryName("zhongguo");
-            int count = sqlSession.insert("insert", c);
+            int count = sqlSession.insert("insertAll", c);
             sqlSession.commit();
-            System.out.println(c);
+            System.out.println(count);
         } finally {
             sqlSession.close();
         }
